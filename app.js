@@ -1,37 +1,53 @@
-// Extract MUI components from global MaterialUI object
-const {
-    Button,
-    Typography,
-    Container,
-    Stack
-} = MaterialUI;
+const App = () => {
+    const {
+        ThemeProvider,
+        CssBaseline,
+        Box
+    } = MaterialUI;
 
-const App = ({ title }) => {
-    const handleClick = () => {
-        alert("MUI Button Clicked!");
+    // Simple State-based Router
+    const [view, setView] = React.useState('home'); // 'home' | 'product'
+    const [selectedProduct, setSelectedProduct] = React.useState(null);
+
+    // Initial Scroll on view change
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [view]);
+
+    // Navigation Handlers
+    const handleProductClick = (productId) => {
+        setSelectedProduct(productId);
+        setView('product');
+    };
+
+    const handleBackClick = () => {
+        setView('home');
+        setSelectedProduct(null);
     };
 
     return (
-        <Container maxWidth="sm" style={{ marginTop: "40px" }}>
-            <Stack spacing={2}>
-                <Typography variant="h4" component="h1">
-                    {title}
-                </Typography>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default' }}>
+                <Navbar onHomeClick={handleBackClick} />
 
-                <Typography variant="body1">
-                    React + JavaScript + MUI using CDN 🚀
-                </Typography>
+                {/* Router Outlet */}
+                <Box component="main" sx={{ flexGrow: 1 }}>
+                    {view === 'home' ? (
+                        <>
+                            <Hero />
+                            <ProductList onProductClick={handleProductClick} />
+                        </>
+                    ) : (
+                        <ProductDetails productId={selectedProduct} onBack={handleBackClick} />
+                    )}
+                </Box>
 
-                <Button variant="contained" onClick={handleClick}>
-                    Click Me
-                </Button>
-            </Stack>
-        </Container>
+                <Footer />
+            </Box>
+        </ThemeProvider>
     );
 };
 
-const root = ReactDOM.createRoot(
-    document.getElementById("root")
-);
-
-root.render(<App title="Hello Souvik" />);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);

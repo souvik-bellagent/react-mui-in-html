@@ -1,0 +1,57 @@
+const Navbar = ({ onHomeClick }) => {
+    const {
+        AppBar,
+        Toolbar,
+        Typography,
+        Button,
+        IconButton,
+        Badge,
+        Box,
+        Container
+    } = MaterialUI;
+
+    return (
+        <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
+            <Container maxWidth="lg">
+                <Toolbar disableGutters>
+                    {/* Logo / Brand Name */}
+                    <Typography
+                        variant="h5"
+                        component="div"
+                        sx={{
+                            flexGrow: 1,
+                            fontWeight: 700,
+                            color: 'primary.main',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}
+                        onClick={onHomeClick}
+                    >
+                        StoreFront
+                    </Typography>
+
+                    {/* Desktop Menu */}
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2, alignItems: 'center' }}>
+                        <Button color="inherit" onClick={onHomeClick}>Home</Button>
+                        <Button color="inherit">Shop</Button>
+                        <Button color="inherit">About</Button>
+                        <Button color="inherit">Contact</Button>
+                    </Box>
+
+                    {/* Actions */}
+                    <Box sx={{ display: 'flex', gap: 1, ml: 2 }}>
+                        <IconButton color="default">
+                            <span className="material-icons">search</span>
+                        </IconButton>
+                        <IconButton color="default">
+                            <Badge badgeContent={2} color="secondary">
+                                <span className="material-icons">shopping_cart</span>
+                            </Badge>
+                        </IconButton>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
+};
