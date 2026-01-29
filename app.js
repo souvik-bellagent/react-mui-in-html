@@ -23,9 +23,16 @@ const App = () => {
         return () => prefersDark.removeListener(handler);
     }, []);
 
-    const toggleTheme = () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-    };
+    // Create the context value
+    const colorMode = React.useMemo(
+        () => ({
+            toggleColorMode: () => {
+                setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+            },
+            mode,
+        }),
+        [mode],
+    );
 
     // 2. Cart State (Resets on Refresh automatically by nature of React State)
     const [cartCount, setCartCount] = React.useState(0);
@@ -49,36 +56,34 @@ const App = () => {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <HashRouter>
-                <ScrollToTop />
-                <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary' }}>
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <HashRouter>
+                    <ScrollToTop />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default', color: 'text.primary' }}>
 
-                    <Navbar
-                        cartCount={cartCount}
-                        mode={mode}
-                        toggleTheme={toggleTheme}
-                    />
+                        <Navbar cartCount={cartCount} />
 
-                    <Box component="main" sx={{ flexGrow: 1 }}>
-                        <Routes>
-                            <Route path="/" element={
-                                <>
-                                    <Hero />
-                                    <ProductList onAddToCart={handleAddToCart} />
-                                </>
-                            } />
-                            <Route
-                                path="/product/:productId"
-                                element={<ProductDetails onAddToCart={handleAddToCart} />}
-                            />
-                        </Routes>
+                        <Box component="main" sx={{ flexGrow: 1 }}>
+                            <Routes>
+                                <Route path="/" element={
+                                    <>
+                                        <Hero />
+                                        <ProductList onAddToCart={handleAddToCart} />
+                                    </>
+                                } />
+                                <Route
+                                    path="/product/:productId"
+                                    element={<ProductDetails onAddToCart={handleAddToCart} />}
+                                />
+                            </Routes>
+                        </Box>
+
+                        <Footer />
                     </Box>
-
-                    <Footer />
-                </Box>
-            </HashRouter>
-        </ThemeProvider>
+                </HashRouter>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
     );
 };

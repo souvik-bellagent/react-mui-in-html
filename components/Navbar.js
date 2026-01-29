@@ -1,4 +1,7 @@
-const Navbar = ({ cartCount, mode, toggleTheme }) => {
+const Navbar = ({ cartCount }) => {
+    // Consume context for Theme
+    const { mode, toggleColorMode } = React.useContext(ColorModeContext);
+
     const {
         AppBar,
         Toolbar,
@@ -47,7 +50,7 @@ const Navbar = ({ cartCount, mode, toggleTheme }) => {
                     <Box sx={{ display: 'flex', gap: 1, ml: 2, alignItems: 'center' }}>
                         {/* Theme Toggle */}
                         <Tooltip title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}>
-                            <IconButton onClick={toggleTheme} color="inherit">
+                            <IconButton onClick={toggleColorMode} color="inherit">
                                 <span className="material-icons">
                                     {mode === 'dark' ? 'light_mode' : 'dark_mode'}
                                 </span>
