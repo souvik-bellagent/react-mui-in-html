@@ -2,7 +2,7 @@
 
 A modern, responsive e-commerce homepage built entirely with **HTML, JavaScript, and Material UI**, without any build tools (no Webpack, Vite, or node_modules).
 
-It uses **React Router DOM (v6)** for client-side routing and **Babel Standalone** to compile JSX right in the browser.
+It uses **React Router DOM (v6)** for client-side routing, **React Context API** for state management, and **Babel Standalone** to compile JSX right in the browser.
 
 ## 🚀 How to Run
 
@@ -20,6 +20,7 @@ Because this project uses multiple JavaScript files and ES Modules via Babel, yo
 -   **React 18** (via CDN)
 -   **Material UI v5** (via CDN)
 -   **React Router DOM v6** (via CDN UMD build)
+-   **React Context API** (for Global Theme State)
 -   **Babel Standalone** (for runtime JSX compilation)
 -   **Emotion** (Styling engine for MUI)
 
@@ -32,7 +33,9 @@ Because this project uses multiple JavaScript files and ES Modules via Babel, yo
 │   ├── ProductList.js  # Product Grid with "Add to Cart"
 │   ├── ProductDetails.js # Details View with Flash Timer
 │   └── Footer.js       # Site footer
-├── app.js              # State Management (Cart, Theme) & Router
+├── contexts/            # React Contexts
+│   └── ThemeContext.js # Global Theme State Provider
+├── app.js              # State Management (Cart) & Router
 ├── data.js             # Mock product data
 ├── theme.js            # Light/Dark Theme configuration
 └── index.html          # Entry point (loads scripts & CDNs)
@@ -42,6 +45,9 @@ Because this project uses multiple JavaScript files and ES Modules via Babel, yo
 
 -   **Zero Build Step**: No `npm install` required.
 -   **Client-Side Routing**: Full navigation (`/#/`, `/#/product/1`) using HashRouter.
+-   **Global State Management**:
+    -   Uses **React Context** to manage Theme State globally.
+    -   Avoids prop drilling for theme toggling.
 -   **Dark/Light Mode**:
     -   Automatically detects system preference.
     -   Manual toggle switch in the navbar.
