@@ -1,4 +1,4 @@
-const Navbar = () => {
+const Navbar = ({ cartCount, mode, toggleTheme }) => {
     const {
         AppBar,
         Toolbar,
@@ -7,14 +7,15 @@ const Navbar = () => {
         IconButton,
         Badge,
         Box,
-        Container
+        Container,
+        Tooltip
     } = MaterialUI;
 
     const { useNavigate } = ReactRouterDOM;
     const navigate = useNavigate();
 
     return (
-        <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
+        <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Container maxWidth="lg">
                 <Toolbar disableGutters>
                     {/* Logo / Brand Name */}
@@ -43,12 +44,22 @@ const Navbar = () => {
                     </Box>
 
                     {/* Actions */}
-                    <Box sx={{ display: 'flex', gap: 1, ml: 2 }}>
-                        <IconButton color="default">
+                    <Box sx={{ display: 'flex', gap: 1, ml: 2, alignItems: 'center' }}>
+                        {/* Theme Toggle */}
+                        <Tooltip title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}>
+                            <IconButton onClick={toggleTheme} color="inherit">
+                                <span className="material-icons">
+                                    {mode === 'dark' ? 'light_mode' : 'dark_mode'}
+                                </span>
+                            </IconButton>
+                        </Tooltip>
+
+                        <IconButton color="inherit">
                             <span className="material-icons">search</span>
                         </IconButton>
-                        <IconButton color="default">
-                            <Badge badgeContent={2} color="secondary">
+
+                        <IconButton color="inherit">
+                            <Badge badgeContent={cartCount} color="secondary">
                                 <span className="material-icons">shopping_cart</span>
                             </Badge>
                         </IconButton>

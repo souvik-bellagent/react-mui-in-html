@@ -1,4 +1,4 @@
-const ProductDetails = () => {
+const ProductDetails = ({ onAddToCart }) => {
     const {
         Container,
         Grid,
@@ -7,14 +7,32 @@ const ProductDetails = () => {
         Rating,
         Box,
         Paper,
-        Divider
+        Divider,
+        Alert,
+        Chip
     } = MaterialUI;
 
     const { useParams, useNavigate } = ReactRouterDOM;
     const { productId } = useParams();
     const navigate = useNavigate();
 
-    // Find the product (convert string ID from URL to number)
+    // Timer Logic: 8 min 45 sec = 525 seconds
+    const [timeLeft, setTimeLeft] = React.useState(525);
+
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    };
+
+    // Find the product
     const product = products.find(p => p.id === parseInt(productId));
 
     if (!product) {
@@ -55,6 +73,26 @@ const ProductDetails = () => {
 
                     {/* Details Section */}
                     <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+                        {/* Flash Offer Timer */}
+                        <Alert
+                            severity="warning"
+                            icon={<span className="material-icons">timer</span>}
+                            sx={{ mb: 3, alignItems: 'center', '& .MuiAlert-message': { width: '100%' } }}
+                        >
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                                    Limited Time Offer ends in:
+                                </Typography>
+                                <Chip
+                                    label={formatTime(timeLeft)}
+                                    color="error"
+                                    size="small"
+                                    sx={{ fontWeight: 'bold', fontFamily: 'monospace', fontSize: '1rem' }}
+                                />
+                            </Box>
+                        </Alert>
+
                         <Typography variant="overline" color="text.secondary" sx={{ letterSpacing: 2 }}>
                             {product.category}
                         </Typography>
@@ -83,6 +121,7 @@ const ProductDetails = () => {
                             <Button
                                 variant="contained"
                                 size="large"
+                                onClick={() => onAddToCart(product)}
                                 sx={{
                                     flexGrow: 1,
                                     py: 1.5,

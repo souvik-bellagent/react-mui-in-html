@@ -1,4 +1,5 @@
-const ProductList = () => {
+const ProductList = ({ onAddToCart }) => {
+    // Renamed to MUI to avoid conflict if MaterialUI is global
     const {
         Container,
         Grid,
@@ -15,6 +16,11 @@ const ProductList = () => {
 
     const { useNavigate } = ReactRouterDOM;
     const navigate = useNavigate();
+
+    const handleAddToCartClick = (e, product) => {
+        e.stopPropagation(); // Prevent navigating to details
+        onAddToCart(product);
+    };
 
     return (
         <Container maxWidth="lg" sx={{ mb: 8 }}>
@@ -40,7 +46,7 @@ const ProductList = () => {
                                         ${product.price}
                                     </Typography>
                                 </Box>
-                                <Chip label={product.category} size="small" sx={{ mb: 2, bgcolor: '#e0f7fa', color: '#006064' }} />
+                                <Chip label={product.category} size="small" sx={{ mb: 2, bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : '#e0f7fa', color: (theme) => theme.palette.mode === 'dark' ? '#fff' : '#006064' }} />
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     <Rating value={product.rating} readOnly precision={0.1} size="small" />
                                     <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
@@ -48,9 +54,24 @@ const ProductList = () => {
                                     </Typography>
                                 </Box>
                             </CardContent>
-                            <CardActions sx={{ p: 2, pt: 0 }}>
-                                <Button size="small" color="primary" fullWidth variant="outlined">
+                            <CardActions sx={{ p: 2, pt: 0, gap: 1 }}>
+                                <Button
+                                    size="small"
+                                    color="primary"
+                                    variant="outlined"
+                                    fullWidth
+                                >
                                     View Details
+                                </Button>
+                                <Button
+                                    size="small"
+                                    variant="contained"
+                                    color="secondary"
+                                    fullWidth
+                                    onClick={(e) => handleAddToCartClick(e, product)}
+                                    startIcon={<span className="material-icons" style={{ fontSize: '16px' }}>add_shopping_cart</span>}
+                                >
+                                    Add
                                 </Button>
                             </CardActions>
                         </Card>

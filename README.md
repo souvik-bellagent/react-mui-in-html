@@ -15,7 +15,6 @@ Because this project uses multiple JavaScript files and ES Modules via Babel, yo
 2.  Right-click on `index.html`.
 3.  Select **"Open with Live Server"**.
 
-
 ## 🛠 Tech Stack
 
 -   **React 18** (via CDN)
@@ -28,24 +27,33 @@ Because this project uses multiple JavaScript files and ES Modules via Babel, yo
 
 ```
 ├── components/          # Reusable UI Components
-│   ├── Navbar.js       # Top navigation bar
+│   ├── Navbar.js       # Navigation + Cart Badge + Theme Toggle
 │   ├── Hero.js         # Homepage banner
-│   ├── ProductList.js  # Grid of product cards
-│   ├── ProductDetails.js # Single product view
+│   ├── ProductList.js  # Product Grid with "Add to Cart"
+│   ├── ProductDetails.js # Details View with Flash Timer
 │   └── Footer.js       # Site footer
-├── app.js              # Main application logic & Router setup
+├── app.js              # State Management (Cart, Theme) & Router
 ├── data.js             # Mock product data
-├── theme.js            # Custom MUI Theme configuration
+├── theme.js            # Light/Dark Theme configuration
 └── index.html          # Entry point (loads scripts & CDNs)
 ```
 
 ## ✨ Features
 
--   **Zero Build Step**: No `npm install` or `npm run build` required.
+-   **Zero Build Step**: No `npm install` required.
 -   **Client-Side Routing**: Full navigation (`/#/`, `/#/product/1`) using HashRouter.
+-   **Dark/Light Mode**:
+    -   Automatically detects system preference.
+    -   Manual toggle switch in the navbar.
+    -   Persists for the session.
+-   **Dynamic Cart**:
+    -   "Add to Cart" functional on both Home and Product pages.
+    -   Cart count increments instantly.
+    -   **Resets on Refresh** (React State behavior).
+-   **Flash Sales Timer**:
+    -   Starts an 8m 45s countdown on every product page visit.
+    -   Simulates urgency for users.
 -   **Modern UI**: Premium design using customized Material UI components.
--   **Global Theme**: Centralized color palette and typography in `theme.js`.
--   **Component Architecture**: Clean separation of concerns with isolated component files.
 
 ## ⚠️ Important Notes
 
