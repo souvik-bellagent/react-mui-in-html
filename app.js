@@ -6,12 +6,8 @@ const {
     Stack
 } = MaterialUI;
 
-type AppProps = {
-    title: string;
-};
-
-const App: React.FC<AppProps> = ({ title }) => {
-    const handleClick = (): void => {
+const App = ({ title }) => {
+    const handleClick = () => {
         alert("MUI Button Clicked!");
     };
 
@@ -23,7 +19,7 @@ const App: React.FC<AppProps> = ({ title }) => {
                 </Typography>
 
                 <Typography variant="body1">
-                    React + TypeScript + MUI using CDN 🚀
+                    React + JavaScript + MUI using CDN 🚀
                 </Typography>
 
                 <Button variant="contained" onClick={handleClick}>
@@ -35,7 +31,7 @@ const App: React.FC<AppProps> = ({ title }) => {
 };
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+    document.getElementById("root")
 );
 
 root.render(<App title="Hello Souvik" />);
