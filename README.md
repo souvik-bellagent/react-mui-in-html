@@ -1,0 +1,53 @@
+# React + MUI E-commerce (HTML/CDN Version)
+
+A modern, responsive e-commerce homepage built entirely with **HTML, JavaScript, and Material UI**, without any build tools (no Webpack, Vite, or node_modules).
+
+It uses **React Router DOM (v6)** for client-side routing and **Babel Standalone** to compile JSX right in the browser.
+
+## 🚀 How to Run
+
+Because this project uses multiple JavaScript files and ES Modules via Babel, you **cannot** simply open `index.html` in your browser (file:// protocol is blocked by CORS).
+
+**You must serve the files locally.**
+
+### Recommended Method (VS Code)
+1.  Install the **[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)** extension for VS Code.
+2.  Right-click on `index.html`.
+3.  Select **"Open with Live Server"**.
+
+
+## 🛠 Tech Stack
+
+-   **React 18** (via CDN)
+-   **Material UI v5** (via CDN)
+-   **React Router DOM v6** (via CDN UMD build)
+-   **Babel Standalone** (for runtime JSX compilation)
+-   **Emotion** (Styling engine for MUI)
+
+## 📂 Project Structure
+
+```
+├── components/          # Reusable UI Components
+│   ├── Navbar.js       # Top navigation bar
+│   ├── Hero.js         # Homepage banner
+│   ├── ProductList.js  # Grid of product cards
+│   ├── ProductDetails.js # Single product view
+│   └── Footer.js       # Site footer
+├── app.js              # Main application logic & Router setup
+├── data.js             # Mock product data
+├── theme.js            # Custom MUI Theme configuration
+└── index.html          # Entry point (loads scripts & CDNs)
+```
+
+## ✨ Features
+
+-   **Zero Build Step**: No `npm install` or `npm run build` required.
+-   **Client-Side Routing**: Full navigation (`/#/`, `/#/product/1`) using HashRouter.
+-   **Modern UI**: Premium design using customized Material UI components.
+-   **Global Theme**: Centralized color palette and typography in `theme.js`.
+-   **Component Architecture**: Clean separation of concerns with isolated component files.
+
+## ⚠️ Important Notes
+
+-   **CDN Links**: We explicitly use **UMD** builds from `unpkg` for React Router and Emotion to ensure global variables (`ReactRouterDOM`, etc.) work correctly without a bundler.
+-   **Production**: This setup is great for prototyping or learning. For production apps, we recommend migrating to Vite/Next.js for better performance.
