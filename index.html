@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React + TSX + MUI (CDN)</title>
+
+    <!-- MUI Roboto Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+
+    <!-- MUI Icons (optional) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Emotion (required by MUI) -->
+    <script src="https://unpkg.com/@emotion/react@11/umd/emotion-react.umd.min.js"></script>
+    <script src="https://unpkg.com/@emotion/styled@11/umd/emotion-styled.umd.min.js"></script>
+
+    <!-- MUI -->
+    <script src="https://unpkg.com/@mui/material@5/umd/material-ui.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Your TSX file -->
+    <script type="text/babel" data-presets="typescript,react" src="./app.tsx"></script>
+</body>
+
+</html>
