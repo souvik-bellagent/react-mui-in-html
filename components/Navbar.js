@@ -1,4 +1,4 @@
-const Navbar = ({ onHomeClick }) => {
+const Navbar = () => {
     const {
         AppBar,
         Toolbar,
@@ -9,6 +9,9 @@ const Navbar = ({ onHomeClick }) => {
         Box,
         Container
     } = MaterialUI;
+
+    const { useNavigate } = ReactRouterDOM;
+    const navigate = useNavigate();
 
     return (
         <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
@@ -26,14 +29,14 @@ const Navbar = ({ onHomeClick }) => {
                             display: 'flex',
                             alignItems: 'center'
                         }}
-                        onClick={onHomeClick}
+                        onClick={() => navigate('/')}
                     >
                         StoreFront
                     </Typography>
 
                     {/* Desktop Menu */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2, alignItems: 'center' }}>
-                        <Button color="inherit" onClick={onHomeClick}>Home</Button>
+                        <Button color="inherit" onClick={() => navigate('/')}>Home</Button>
                         <Button color="inherit">Shop</Button>
                         <Button color="inherit">About</Button>
                         <Button color="inherit">Contact</Button>

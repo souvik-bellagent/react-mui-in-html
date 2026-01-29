@@ -1,4 +1,4 @@
-const ProductDetails = ({ productId, onBack }) => {
+const ProductDetails = () => {
     const {
         Container,
         Grid,
@@ -10,14 +10,18 @@ const ProductDetails = ({ productId, onBack }) => {
         Divider
     } = MaterialUI;
 
-    // Find the product based on the ID passed
-    const product = products.find(p => p.id === productId);
+    const { useParams, useNavigate } = ReactRouterDOM;
+    const { productId } = useParams();
+    const navigate = useNavigate();
+
+    // Find the product (convert string ID from URL to number)
+    const product = products.find(p => p.id === parseInt(productId));
 
     if (!product) {
         return (
             <Container sx={{ py: 8, textAlign: 'center' }}>
                 <Typography variant="h5">Product not found</Typography>
-                <Button onClick={onBack} sx={{ mt: 2 }}>Back to Shop</Button>
+                <Button onClick={() => navigate('/')} sx={{ mt: 2 }}>Back to Shop</Button>
             </Container>
         );
     }
@@ -26,7 +30,7 @@ const ProductDetails = ({ productId, onBack }) => {
         <Container maxWidth="lg" sx={{ py: 8 }}>
             <Button
                 startIcon={<span className="material-icons">arrow_back</span>}
-                onClick={onBack}
+                onClick={() => navigate('/')}
                 sx={{ mb: 4 }}
             >
                 Back to Shop

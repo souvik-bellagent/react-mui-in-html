@@ -1,4 +1,4 @@
-const ProductList = ({ onProductClick }) => {
+const ProductList = () => {
     const {
         Container,
         Grid,
@@ -13,6 +13,9 @@ const ProductList = ({ onProductClick }) => {
         Box
     } = MaterialUI;
 
+    const { useNavigate } = ReactRouterDOM;
+    const navigate = useNavigate();
+
     return (
         <Container maxWidth="lg" sx={{ mb: 8 }}>
             <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
@@ -21,7 +24,7 @@ const ProductList = ({ onProductClick }) => {
             <Grid container spacing={4}>
                 {products.map((product) => (
                     <Grid item key={product.id} xs={12} sm={6} md={4}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }} onClick={() => onProductClick(product.id)}>
+                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }} onClick={() => navigate(`/product/${product.id}`)}>
                             <CardMedia
                                 component="img"
                                 height="260"

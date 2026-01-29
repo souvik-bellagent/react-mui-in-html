@@ -20,24 +20,30 @@
 <body>
     <div id="root"></div>
 
-    <!-- React -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- React Dependencies (UMD) -->
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 
-    <!-- Emotion (Required by MUI, load BEFORE MUI) -->
-    <script src="https://unpkg.com/@emotion/react@11.11.4/umd/emotion-react.umd.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@emotion/styled@11.11.0/umd/emotion-styled.umd.min.js"
-        crossorigin="anonymous"></script>
+    <!-- React Router DOM (v6.18.0 UMD) -->
+    <!-- Dependency: Remix Router -->
+    <script crossorigin src="https://unpkg.com/@remix-run/router@1.11.0/dist/router.umd.min.js"></script>
+    <!-- Dependency: React Router -->
+    <script crossorigin src="https://unpkg.com/react-router@6.18.0/dist/umd/react-router.production.min.js"></script>
+    <!-- Main: React Router DOM -->
+    <script crossorigin
+        src="https://unpkg.com/react-router-dom@6.18.0/dist/umd/react-router-dom.production.min.js"></script>
 
-    <!-- MUI -->
-    <script src="https://unpkg.com/@mui/material@5.15.11/umd/material-ui.development.js"
-        crossorigin="anonymous"></script>
+    <!-- Emotion (UMD) - Required by MUI -->
+    <script crossorigin src="https://unpkg.com/@emotion/react@11.11.1/dist/emotion-react.umd.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@emotion/styled@11.11.0/dist/emotion-styled.umd.min.js"></script>
 
-    <!-- Babel -->
+    <!-- Material UI (UMD) -->
+    <script crossorigin src="https://unpkg.com/@mui/material@5.15.14/umd/material-ui.development.js"></script>
+
+    <!-- Babel for in-browser JSX support -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Application Scripts (Order Matters!) -->
+    <!-- Application Scripts -->
 
     <!-- 1. Data & Theme -->
     <script type="text/babel" data-presets="react" src="./data.js"></script>
